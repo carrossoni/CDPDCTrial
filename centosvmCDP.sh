@@ -1,4 +1,12 @@
 #! /bin/bash
+echo "-- Configure user cloudera with passwordless"
+useradd cloudera -d /home/cloudera -p cloudera
+sudo usermod -aG wheel cloudera
+cp /etc/sudoers /etc/sudoers.bkp
+rm -rf /etc/sudoers
+sed '/^#includedir.*/a cloudera ALL=(ALL) NOPASSWD: ALL' /etc/sudoers.bkp > /etc/sudoers
+echo "create data dir"
+sudo mkdir /data
 echo "-- Configure and optimize the OS"
 echo never > /sys/kernel/mm/transparent_hugepage/enabled
 echo never > /sys/kernel/mm/transparent_hugepage/defrag
