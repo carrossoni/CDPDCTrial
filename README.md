@@ -1,4 +1,4 @@
-# CDPDCTrial
+# Cloudera CDP DC Trial VM using Vagrant/Virtualbox
 Steps to create a Cloudera CDP DC Trial environment from scratch
 
 ## Requirements
