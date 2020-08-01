@@ -2,7 +2,6 @@
 echo "> Installing required tools for CDP TRIAL"
 if  [ -n "$(command -v yum)" ]; then
     echo ">> Detected yum-based Linux"
-    sudo yum makecache
     sudo yum install -y util-linux
     sudo yum install -y lvm2
     sudo yum install -y e2fsprogs
@@ -19,21 +18,21 @@ fi
 ROOT_DISK_DEVICE="/dev/sda"
 echo "> Creating new partition for CDP"
 sudo fdisk $ROOT_DISK_DEVICE <<EOF
+d
 n
 p
-2
+1
 
 
 w
 EOF
-sudo partprobe
-sudo kpartx -u /dev/sda2
-sudo pvcreate /dev/sda2
+sudo partprobe /dev/sda
+sudo kpartx -u /dev/sda1
+sudo e2fsck -f /dev/sda1
+#sudo pvcreate /dev/sda1
+sudo xfs_growfs /
 cd /
 sudo mkdir data
-sudo mkfs.ext4 /dev/sda2
-sudo mount /dev/sda2 data
-
 
 echo "Downloading CDP DC Trial Pre Req Install"
 
@@ -42,5 +41,7 @@ git clone https://github.com/carrossoni/CDPDCTrial.git
 cd CDPDCTrial
 chmod 777 centosvmCDP.sh
 sudo ./centosvmCDP.sh
+
+sudo reboot
 
 exit 0
