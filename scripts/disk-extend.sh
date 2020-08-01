@@ -28,7 +28,7 @@ n
 p
 1
 2048
-no
+
 w
 EOF
 sudo pvresize $ROOT_DISK_DEVICE_PART
