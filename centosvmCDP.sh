@@ -83,6 +83,7 @@ cp ~/mysql-connector-java-5.1.46/mysql-connector-java-5.1.46-bin.jar /usr/share/
 rm -rf ~/mysql-connector-java-5.1.46*
 
 echo "-- Create DBs required by CM"
+cd /root/CDPDCTrial
 mysql -u root < scripts/create_db.sql
 
 echo "-- Secure MariaDB"
