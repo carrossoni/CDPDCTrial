@@ -26,6 +26,7 @@ p
 
 w
 EOF
+sudo partprobe
 sudo kpartx -u /dev/sda2
 sudo pvcreate /dev/sda2
 cd /
