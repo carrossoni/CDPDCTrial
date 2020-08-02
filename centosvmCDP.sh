@@ -37,9 +37,9 @@ systemctl restart chronyd
 echo "-- Configure networking"
 PUBLIC_IP=`curl https://api.ipify.org/`
 #hostnamectl set-hostname `hostname -f`
-sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
-echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
-sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
+#sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
+#echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
+#sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
 setenforce 0
@@ -54,7 +54,7 @@ sysctl -p
 
 echo "-- Install CM and MariaDB"
 
-## CM 7
+# CM 7
 cd /
 wget https://archive.cloudera.com/cm7/7.1.1/redhat7/yum/cloudera-manager-trial.repo -P /etc/yum.repos.d/
 
