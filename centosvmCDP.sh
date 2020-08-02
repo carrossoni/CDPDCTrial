@@ -36,13 +36,21 @@ systemctl restart chronyd
 
 echo "-- Configure networking"
 PUBLIC_IP=`curl https://api.ipify.org/`
-hostnamectl set-hostname `hostname -f`
-echo "`hostname -I` `hostname`" >> /etc/hosts
+#hostnamectl set-hostname `hostname -f`
+sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
+echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
 sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
 setenforce 0
 sed -i 's/SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
+
+echo  "Disabling IPv6"
+echo "net.ipv6.conf.all.disable_ipv6 = 1
+      net.ipv6.conf.default.disable_ipv6 = 1
+      net.ipv6.conf.lo.disable_ipv6 = 1
+      net.ipv6.conf.eth0.disable_ipv6 = 1" >> /etc/sysctl.conf
+sysctl -p
 
 echo "-- Install CM and MariaDB"
 
