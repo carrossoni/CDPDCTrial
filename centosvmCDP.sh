@@ -37,11 +37,13 @@ systemctl restart chronyd
 echo "-- Configure networking"
 PUBLIC_IP=`curl https://api.ipify.org/`
 #hostnamectl set-hostname `hostname -f`
-#sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
-#echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
+sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
+sed -i$(date +%s).bak '/^[^#]*::1/s/^/# /' /etc/hosts
+echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
 #sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
+service firewalld stop
 setenforce 0
 sed -i 's/SELINUX=.*/SELINUX=disabled/' /etc/selinux/config
 
@@ -74,6 +76,13 @@ yum repolist
 
 ## CM
 yum install -y cloudera-manager-agent cloudera-manager-daemons cloudera-manager-server
+
+sed -i$(date +%s).bak '/^[^#]*server_host/s/^/# /' /etc/cloudera-scm-agent/config.ini
+sed -i$(date +%s).bak '/^[^#]*listening_ip/s/^/# /' /etc/cloudera-scm-agent/config.ini
+sed -i$(date +%s).bak "/^server_host.*/i server_host=$(hostname)" /etc/cloudera-scm-agent/config.ini
+sed -i$(date +%s).bak "/^listening_ip=.*/i listening_ip=$(host cloudera | awk '{print $4}')" /etc/cloudera-scm-agent/config.ini
+
+service cloudera-scm-agent restart
 
 ## MariaDB
 yum install -y MariaDB-server MariaDB-client
