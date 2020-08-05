@@ -4,8 +4,8 @@
   "displayName": "cdpsandbox",
   "hostTemplates": [
     {
-      "cardinality": 1,
-      "refName": "cdptrialsandbox",
+      "cardinality": 1.0,
+      "refName": "HostTemplate-0-from-YourHostname",
       "roleConfigGroupsRefNames": [
         "hdfs-BALANCER-BASE",
         "hdfs-DATANODE-BASE",
@@ -30,12 +30,8 @@
     "clusterName": "cdpsandboxtrial",
     "hosts": [
       {
-        "hostName": "cloudera",
-        "hostTemplateRefName": "cdpsandbox"
-      },
-      {
-        "hostNameRange": "cloudera[0001]",
-        "hostTemplateRefName": "cdpsandbox"
+        "hostName": "YourHostname",
+        "hostTemplateRefName": "HostTemplate-0-from-YourHostname"
       }
     ],
     "variables": [
@@ -100,20 +96,7 @@
     }
   ],
   "repositories": [
-    "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/",
-    "https://archive.cloudera.com/cdh7/7.1.1.0/parcels/",
-    "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/",
-    "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/",
-    "https://archive.cloudera.com/p/cdh5/parcels/latest",
-    "https://archive.cloudera.com/cdh5/parcels/5.16/",
-    "https://parcels.repos.intel.com/mkl/latest",
-    "https://archive.cloudera.com/accumulo-c5/parcels/latest/",
-    "https://archive.cloudera.com/accumulo6/6.1/parcels/",
-    "https://archive.cloudera.com/kafka/parcels/latest/",
-    "http://archive.cloudera.com/kudu/parcels/latest/",
-    "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/",
-    "https://archive.cloudera.com/sqoop-connectors/parcels/latest/",
-    "https://archive.cloudera.com/sqoop-netezza-connector1/latest/"
+    "https://archive.cloudera.com/cdh7/7.1.1.0/parcels/"
   ],
   "services": [
     {
@@ -255,6 +238,22 @@
           "base": true,
           "refName": "hdfs-BALANCER-BASE",
           "roleType": "BALANCER"
+        },
+        {
+          "name":"dfs_replication",
+          "value":"1"
+        },
+        {
+          "name":"hdfs_verify_ec_with_topology_enabled",
+          "value":"false"
+        },
+        {
+          "name": "enable_ranger_authorization",
+          "value": "true"
+        },
+        {
+          "name":"hdfs_under_replicated_blocks_thresholds",
+          "value":"{\"warning\":\"never\",\"critical\":\"never\"}"
         }
       ],
       "serviceType": "HDFS"
