@@ -208,6 +208,3 @@ while [ `curl -s -X GET -u "admin:admin"  http://localhost:7180/api/version` -z 
     echo "waiting 10s for CM to come up..";
     sleep 10;
 done
-
-curl -X POST -H "Content-Type: application/json" -d ~/CDPDCTrial/conf/cdpsandboxtemplate.json http://admin:admin@cloudera:7180/api/v12/cm/importClusterTemplate
-curl -X POST -H "Content-Type: application/json" -d cdpsandbox.json http://admin:admin@cloudera:7180/api/v12/cm/importClusterTemplate
