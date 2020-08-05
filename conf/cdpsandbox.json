@@ -354,17 +354,17 @@
     "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "hive-GATEWAY-BASE", "hive-HIVEMETASTORE-BASE", "hue-HUE_LOAD_BALANCER-BASE", "hue-HUE_SERVER-BASE", "impala-CATALOGSERVER-BASE", "impala-IMPALAD-BASE", "impala-STATESTORE-BASE", "ranger-RANGER_ADMIN-BASE", "ranger-RANGER_TAGSYNC-BASE", "ranger-RANGER_USERSYNC-BASE", "solr-SOLR_SERVER-BASE", "zookeeper-SERVER-BASE" ]
   } ],
   "instantiator" : {
-    "clusterName" : "<changeme>",
+    "clusterName" : "clouderacdpsandbox",
     "hosts" : [ {
-      "hostName" : "<changeme>",
-      "hostTemplateRefName" : "<changeme>",
+      "hostName" : "cloudera",
+      "hostTemplateRefName" : "HostTemplate-0-from-cloudera",
       "roleRefNames" : [ "hdfs-NAMENODE-1db1d44c43d38eb70021ab54e6af07cc" ]
     }, {
-      "hostName" : "<changeme>",
-      "hostTemplateRefName" : "<changeme>"
+      "hostName" : "cloudera",
+      "hostTemplateRefName" : "HostTemplate-0-from-cloudera"
     }, {
-      "hostNameRange" : "<HOST[0001-0002]>",
-      "hostTemplateRefName" : "<changeme>"
+      "hostNameRange" : "cloudera>",
+      "hostTemplateRefName" : "HostTemplate-0-from-cloudera"
     } ],
     "variables" : [ {
       "name" : "hdfs-NAMENODE-BASE-dfs_name_dir_list",
@@ -377,13 +377,13 @@
       "value" : "cloudera"
     }, {
       "name" : "hive-hive_metastore_database_password",
-      "value" : "<changeme>"
+      "value" : "cloudera"
     }, {
       "name" : "hue-database_host",
       "value" : "cloudera"
     }, {
       "name" : "hue-database_password",
-      "value" : "<changeme>"
+      "value" : "cloudera"
     }, {
       "name" : "hue-database_type",
       "value" : "mysql"
@@ -392,22 +392,22 @@
       "value" : "/impala/impalad"
     }, {
       "name" : "ranger-keyadmin_user_password",
-      "value" : "<changeme>"
+      "value" : "cloudera123"
     }, {
       "name" : "ranger-ranger_database_password",
-      "value" : "<changeme>"
+      "value" : "cloudera"
     }, {
       "name" : "ranger-ranger_database_user",
       "value" : "ranger"
     }, {
       "name" : "ranger-rangeradmin_user_password",
-      "value" : "<changeme>"
+      "value" : "cloudera123"
     }, {
       "name" : "ranger-rangertagsync_user_password",
-      "value" : "<changeme>"
+      "value" : "cloudera123"
     }, {
       "name" : "ranger-rangerusersync_user_password",
-      "value" : "<changeme>"
+      "value" : "cloudera123"
     }, {
       "name" : "solr-GATEWAY-BASE-client_config_root_dir",
       "value" : "/etc/solr-infra"
