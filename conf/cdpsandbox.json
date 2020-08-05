@@ -1,429 +1,310 @@
 {
-  "cdhVersion" : "7.1.1",
-  "displayName" : "cdpsandbox",
-  "cmVersion" : "7.1.1",
-  "repositories" : [ "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/", "https://archive.cloudera.com/cdh7/7.1.1.0/parcels/", "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/", "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/", "https://archive.cloudera.com/p/cdh5/parcels/latest", "https://archive.cloudera.com/cdh5/parcels/5.16/", "https://parcels.repos.intel.com/mkl/latest", "https://archive.cloudera.com/accumulo-c5/parcels/latest/", "https://archive.cloudera.com/accumulo6/6.1/parcels/", "https://archive.cloudera.com/kafka/parcels/latest/", "http://archive.cloudera.com/kudu/parcels/latest/", "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/", "https://archive.cloudera.com/sqoop-connectors/parcels/latest/", "https://archive.cloudera.com/sqoop-netezza-connector1/latest/" ],
-  "products" : [ {
-    "version" : "7.1.1-1.cdh7.1.1.p0.3266817",
-    "product" : "CDH"
-  } ],
-  "services" : [ {
-    "refName" : "zookeeper",
-    "serviceType" : "ZOOKEEPER",
-    "roleConfigGroups" : [ {
-      "refName" : "zookeeper-SERVER-BASE",
-      "roleType" : "SERVER",
-      "configs" : [ {
-        "name" : "zookeeper_server_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ]
-  }, {
-    "refName" : "solr",
-    "serviceType" : "SOLR",
-    "serviceConfigs" : [ {
-      "name" : "hdfs_service",
-      "ref" : "hdfs",
-      "autoConfig" : true
-    }, {
-      "name" : "ranger_audit_hdfs_dir",
-      "value" : "${ranger_base_audit_url}/solr-infra",
-      "autoConfig" : true
-    }, {
-      "name" : "ranger_audit_solr_spool_dir",
-      "variable" : "solr-ranger_audit_solr_spool_dir",
-      "autoConfig" : true
-    }, {
-      "name" : "zookeeper_znode",
-      "value" : "/solr-infra",
-      "autoConfig" : true
-    }, {
-      "name" : "hdfs_data_dir",
-      "value" : "/solr-infra",
-      "autoConfig" : true
-    }, {
-      "name" : "ranger_audit_hdfs_spool_dir",
-      "variable" : "solr-ranger_audit_hdfs_spool_dir",
-      "autoConfig" : true
-    }, {
-      "name" : "zookeeper_service",
-      "ref" : "zookeeper",
-      "autoConfig" : true
-    }, {
-      "name" : "ranger_policy_cache_dir",
-      "variable" : "solr-ranger_policy_cache_dir",
-      "autoConfig" : true
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "solr-SOLR_SERVER-BASE",
-      "roleType" : "SOLR_SERVER",
-      "configs" : [ {
-        "name" : "solr_http_port",
-        "value" : "8993",
-        "autoConfig" : true
-      }, {
-        "name" : "solr_data_dir",
-        "variable" : "solr-SOLR_SERVER-BASE-solr_data_dir",
-        "autoConfig" : true
-      }, {
-        "name" : "solr_java_heapsize",
-        "value" : "209715200",
-        "autoConfig" : true
-      }, {
-        "name" : "solr_log_dir",
-        "value" : "/var/log/solr-infra",
-        "autoConfig" : true
-      }, {
-        "name" : "solr_java_direct_memory_size",
-        "value" : "268435456",
-        "autoConfig" : true
-      }, {
-        "name" : "solr_https_port",
-        "value" : "8995",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ]
-  }, {
-    "refName" : "ranger",
-    "serviceType" : "RANGER",
-    "serviceConfigs" : [ {
-      "name" : "hdfs_service",
-      "ref" : "hdfs",
-      "autoConfig" : true
-    }, {
-      "name" : "ranger_database_password",
-      "variable" : "ranger-ranger_database_password"
-    }, {
-      "name" : "rangeradmin_user_password",
-      "variable" : "ranger-rangeradmin_user_password"
-    }, {
-      "name" : "rangertagsync_user_password",
-      "variable" : "ranger-rangertagsync_user_password"
-    }, {
-      "name" : "solr_service",
-      "ref" : "solr",
-      "autoConfig" : true
-    }, {
-      "name" : "rangerusersync_user_password",
-      "variable" : "ranger-rangerusersync_user_password"
-    }, {
-      "name" : "keyadmin_user_password",
-      "variable" : "ranger-keyadmin_user_password"
-    }, {
-      "name" : "ranger_database_user",
-      "variable" : "ranger-ranger_database_user"
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "ranger-RANGER_USERSYNC-BASE",
-      "roleType" : "RANGER_USERSYNC",
-      "configs" : [ {
-        "name" : "ranger_usersync_max_heap_size",
-        "value" : "256",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    }, {
-      "refName" : "ranger-RANGER_TAGSYNC-BASE",
-      "roleType" : "RANGER_TAGSYNC",
-      "configs" : [ {
-        "name" : "ranger_tagsync_max_heap_size",
-        "value" : "256",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    }, {
-      "refName" : "ranger-RANGER_ADMIN-BASE",
-      "roleType" : "RANGER_ADMIN",
-      "configs" : [ {
-        "name" : "ranger_admin_max_heap_size",
-        "value" : "256",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ]
-  }, {
-    "refName" : "hue",
-    "serviceType" : "HUE",
-    "serviceConfigs" : [ {
-      "name" : "hue_webhdfs",
-      "ref" : "hdfs-NAMENODE-1db1d44c43d38eb70021ab54e6af07cc",
-      "autoConfig" : true
-    }, {
-      "name" : "database_password",
-      "variable" : "hue-database_password"
-    }, {
-      "name" : "database_type",
-      "variable" : "hue-database_type"
-    }, {
-      "name" : "database_host",
-      "variable" : "hue-database_host"
-    }, {
-      "name" : "solr_service",
-      "ref" : "solr",
-      "autoConfig" : true
-    }, {
-      "name" : "hms_service",
-      "ref" : "hive",
-      "autoConfig" : true
-    }, {
-      "name" : "hdfs_service",
-      "ref" : "hdfs",
-      "autoConfig" : true
-    }, {
-      "name" : "impala_service",
-      "ref" : "impala",
-      "autoConfig" : true
-    }, {
-      "name" : "zookeeper_service",
-      "ref" : "zookeeper",
-      "autoConfig" : true
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "hue-HUE_SERVER-BASE",
-      "roleType" : "HUE_SERVER",
-      "base" : true
-    }, {
-      "refName" : "hue-HUE_LOAD_BALANCER-BASE",
-      "roleType" : "HUE_LOAD_BALANCER",
-      "base" : true
-    } ]
-  }, {
-    "refName" : "hdfs",
-    "serviceType" : "HDFS",
-    "serviceConfigs" : [ {
-      "name" : "zookeeper_service",
-      "ref" : "zookeeper",
-      "autoConfig" : true
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "hdfs-NAMENODE-BASE",
-      "roleType" : "NAMENODE",
-      "configs" : [ {
-        "name" : "dfs_namenode_servicerpc_address",
-        "value" : "8022",
-        "autoConfig" : true
-      }, {
-        "name" : "dfs_name_dir_list",
-        "variable" : "hdfs-NAMENODE-BASE-dfs_name_dir_list"
-      }, {
-        "name" : "namenode_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    }, {
-      "refName" : "hdfs-SECONDARYNAMENODE-BASE",
-      "roleType" : "SECONDARYNAMENODE",
-      "configs" : [ {
-        "name" : "fs_checkpoint_dir_list",
-        "variable" : "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list"
-      }, {
-        "name" : "secondary_namenode_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    }, {
-      "refName" : "hdfs-DATANODE-BASE",
-      "roleType" : "DATANODE",
-      "configs" : [ {
-        "name" : "dfs_datanode_data_dir_perm",
-        "value" : "755",
-        "autoConfig" : true
-      }, {
-        "name" : "datanode_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      }, {
-        "name" : "dfs_datanode_du_reserved",
-        "value" : "10735216640",
-        "autoConfig" : true
-      }, {
-        "name" : "dfs_datanode_max_locked_memory",
-        "value" : "0",
-        "autoConfig" : true
-      }, {
-        "name" : "dfs_data_dir_list",
-        "value" : "/data/dfs/dn"
-      } ],
-      "base" : true
-    }, {
-      "refName" : "hdfs-BALANCER-BASE",
-      "roleType" : "BALANCER",
-      "configs" : [ {
-        "name" : "balancer_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ],
-    "roles" : [ {
-      "refName" : "hdfs-NAMENODE-1db1d44c43d38eb70021ab54e6af07cc",
-      "roleType" : "NAMENODE"
-    } ]
-  }, {
-    "refName" : "impala",
-    "serviceType" : "IMPALA",
-    "serviceConfigs" : [ {
-      "name" : "ranger_service",
-      "ref" : "ranger",
-      "autoConfig" : true
-    }, {
-      "name" : "hdfs_service",
-      "ref" : "hdfs",
-      "autoConfig" : true
-    }, {
-      "name" : "hive_service",
-      "ref" : "hive",
-      "autoConfig" : true
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "impala-IMPALAD-BASE",
-      "roleType" : "IMPALAD",
-      "configs" : [ {
-        "name" : "impalad_memory_limit",
-        "value" : "268435456",
-        "autoConfig" : true
-      }, {
-        "name" : "scratch_dirs",
-        "variable" : "impala-IMPALAD-BASE-scratch_dirs",
-        "autoConfig" : true
-      }, {
-        "name" : "impalad_embedded_jvm_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    }, {
-      "refName" : "impala-STATESTORE-BASE",
-      "roleType" : "STATESTORE",
-      "base" : true
-    }, {
-      "refName" : "impala-CATALOGSERVER-BASE",
-      "roleType" : "CATALOGSERVER",
-      "configs" : [ {
-        "name" : "catalogd_embedded_jvm_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ]
-  }, {
-    "refName" : "hive",
-    "serviceType" : "HIVE",
-    "serviceConfigs" : [ {
-      "name" : "ranger_service",
-      "ref" : "ranger",
-      "autoConfig" : true
-    }, {
-      "name" : "hive_metastore_database_password",
-      "variable" : "hive-hive_metastore_database_password"
-    }, {
-      "name" : "hdfs_service",
-      "ref" : "hdfs",
-      "autoConfig" : true
-    }, {
-      "name" : "zookeeper_service",
-      "ref" : "zookeeper",
-      "autoConfig" : true
-    }, {
-      "name" : "hive_metastore_database_host",
-      "variable" : "hive-hive_metastore_database_host"
-    } ],
-    "roleConfigGroups" : [ {
-      "refName" : "hive-GATEWAY-BASE",
-      "roleType" : "GATEWAY",
-      "base" : true
-    }, {
-      "refName" : "hive-HIVEMETASTORE-BASE",
-      "roleType" : "HIVEMETASTORE",
-      "configs" : [ {
-        "name" : "hive_metastore_java_heapsize",
-        "value" : "52428800",
-        "autoConfig" : true
-      } ],
-      "base" : true
-    } ]
-  } ],
-  "hostTemplates" : [ {
-    "refName" : "HostTemplate-0-from-cloudera",
-    "cardinality" : 1,
-    "roleConfigGroupsRefNames" : [ "hdfs-BALANCER-BASE", "hdfs-DATANODE-BASE", "hdfs-NAMENODE-BASE", "hdfs-SECONDARYNAMENODE-BASE", "hive-GATEWAY-BASE", "hive-HIVEMETASTORE-BASE", "hue-HUE_LOAD_BALANCER-BASE", "hue-HUE_SERVER-BASE", "impala-CATALOGSERVER-BASE", "impala-IMPALAD-BASE", "impala-STATESTORE-BASE", "ranger-RANGER_ADMIN-BASE", "ranger-RANGER_TAGSYNC-BASE", "ranger-RANGER_USERSYNC-BASE", "solr-SOLR_SERVER-BASE", "zookeeper-SERVER-BASE" ]
-  } ],
-  "instantiator" : {
-    "clusterName" : "clouderacdpsandbox",
-    "hosts" : [ {
-      "hostName" : "cloudera",
-      "hostTemplateRefName" : "HostTemplate-0-from-cloudera",
-      "roleRefNames" : [ "hdfs-NAMENODE-1db1d44c43d38eb70021ab54e6af07cc" ]
-    }, {
-      "hostName" : "cloudera",
-      "hostTemplateRefName" : "HostTemplate-0-from-cloudera"
-    }, {
-      "hostNameRange" : "cloudera>",
-      "hostTemplateRefName" : "HostTemplate-0-from-cloudera"
-    } ],
-    "variables" : [ {
-      "name" : "hdfs-NAMENODE-BASE-dfs_name_dir_list",
-      "value" : "/data/dfs/nn"
-    }, {
-      "name" : "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list",
-      "value" : "/data/dfs/snn"
-    }, {
-      "name" : "hive-hive_metastore_database_host",
-      "value" : "cloudera"
-    }, {
-      "name" : "hive-hive_metastore_database_password",
-      "value" : "cloudera"
-    }, {
-      "name" : "hue-database_host",
-      "value" : "cloudera"
-    }, {
-      "name" : "hue-database_password",
-      "value" : "cloudera"
-    }, {
-      "name" : "hue-database_type",
-      "value" : "mysql"
-    }, {
-      "name" : "impala-IMPALAD-BASE-scratch_dirs",
-      "value" : "/impala/impalad"
-    }, {
-      "name" : "ranger-keyadmin_user_password",
-      "value" : "cloudera123"
-    }, {
-      "name" : "ranger-ranger_database_password",
-      "value" : "cloudera"
-    }, {
-      "name" : "ranger-ranger_database_user",
-      "value" : "ranger"
-    }, {
-      "name" : "ranger-rangeradmin_user_password",
-      "value" : "cloudera123"
-    }, {
-      "name" : "ranger-rangertagsync_user_password",
-      "value" : "cloudera123"
-    }, {
-      "name" : "ranger-rangerusersync_user_password",
-      "value" : "cloudera123"
-    }, {
-      "name" : "solr-GATEWAY-BASE-client_config_root_dir",
-      "value" : "/etc/solr-infra"
-    }, {
-      "name" : "solr-SOLR_SERVER-BASE-solr_data_dir",
-      "value" : "/var/lib/solr-infra"
-    }, {
-      "name" : "solr-ranger_audit_hdfs_spool_dir",
-      "value" : "/var/log/solr-infra/audit/hdfs/spool"
-    }, {
-      "name" : "solr-ranger_audit_solr_spool_dir",
-      "value" : "/var/log/solr-infra/audit/solr/spool"
-    }, {
-      "name" : "solr-ranger_policy_cache_dir",
-      "value" : "/var/lib/ranger/solr-infra/policy-cache"
-    } ],
-    "lenient" : false
-  }
+  "cdhVersion": "7.1.1",
+  "cmVersion": "7.1.1",
+  "displayName": "cdpsandbox",
+  "hostTemplates": [
+    {
+      "cardinality": 1,
+      "refName": "cdptrialsandbox",
+      "roleConfigGroupsRefNames": [
+        "hdfs-BALANCER-BASE",
+        "hdfs-DATANODE-BASE",
+        "hdfs-NAMENODE-BASE",
+        "hdfs-SECONDARYNAMENODE-BASE",
+        "hive-GATEWAY-BASE",
+        "hive-HIVEMETASTORE-BASE",
+        "hue-HUE_LOAD_BALANCER-BASE",
+        "hue-HUE_SERVER-BASE",
+        "impala-CATALOGSERVER-BASE",
+        "impala-IMPALAD-BASE",
+        "impala-STATESTORE-BASE",
+        "ranger-RANGER_ADMIN-BASE",
+        "ranger-RANGER_TAGSYNC-BASE",
+        "ranger-RANGER_USERSYNC-BASE",
+        "solr-SOLR_SERVER-BASE",
+        "zookeeper-SERVER-BASE"
+      ]
+    }
+  ],
+  "instantiator": {
+    "clusterName": "cdpsandboxtrial",
+    "hosts": [
+      {
+        "hostName": "cloudera",
+        "hostTemplateRefName": "cdpsandbox"
+      },
+      {
+        "hostNameRange": "cloudera[0001]",
+        "hostTemplateRefName": "cdpsandbox"
+      }
+    ],
+    "variables": [
+      {
+        "name": "hdfs-NAMENODE-BASE-dfs_name_dir_list",
+        "value": "/data/dfs/nn"
+      },
+      {
+        "name": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list",
+        "value": "/data/dfs/snn"
+      },
+      {
+        "name": "hive-hive_metastore_database_host",
+        "value": "cloudera"
+      },
+      {
+        "name": "hive-hive_metastore_database_password",
+        "value": "cloudera"
+      },
+      {
+        "name": "hue-database_host",
+        "value": "cloudera"
+      },
+      {
+        "name": "hue-database_password",
+        "value": "cloudera"
+      },
+      {
+        "name": "hue-database_type",
+        "value": "mysql"
+      },
+      {
+        "name": "ranger-keyadmin_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-ranger_database_password",
+        "value": "cloudera"
+      },
+      {
+        "name": "ranger-ranger_database_user",
+        "value": "ranger"
+      },
+      {
+        "name": "ranger-rangeradmin_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-rangertagsync_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-rangerusersync_user_password",
+        "value": "cloudera123"
+      }
+    ]
+  },
+  "products": [
+    {
+      "product": "CDH",
+      "version": "7.1.1-1.cdh7.1.1.p0.3266817"
+    }
+  ],
+  "repositories": [
+    "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/cdh7/7.1.1.0/parcels/",
+    "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/p/cdh5/parcels/latest",
+    "https://archive.cloudera.com/cdh5/parcels/5.16/",
+    "https://parcels.repos.intel.com/mkl/latest",
+    "https://archive.cloudera.com/accumulo-c5/parcels/latest/",
+    "https://archive.cloudera.com/accumulo6/6.1/parcels/",
+    "https://archive.cloudera.com/kafka/parcels/latest/",
+    "http://archive.cloudera.com/kudu/parcels/latest/",
+    "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/",
+    "https://archive.cloudera.com/sqoop-connectors/parcels/latest/",
+    "https://archive.cloudera.com/sqoop-netezza-connector1/latest/"
+  ],
+  "services": [
+    {
+      "refName": "zookeeper",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "zookeeper-SERVER-BASE",
+          "roleType": "SERVER"
+        }
+      ],
+      "serviceType": "ZOOKEEPER"
+    },
+    {
+      "refName": "solr",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "solr-SOLR_SERVER-BASE",
+          "roleType": "SOLR_SERVER"
+        }
+      ],
+      "serviceType": "SOLR"
+    },
+    {
+      "refName": "ranger",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "ranger-RANGER_USERSYNC-BASE",
+          "roleType": "RANGER_USERSYNC"
+        },
+        {
+          "base": true,
+          "refName": "ranger-RANGER_TAGSYNC-BASE",
+          "roleType": "RANGER_TAGSYNC"
+        },
+        {
+          "base": true,
+          "refName": "ranger-RANGER_ADMIN-BASE",
+          "roleType": "RANGER_ADMIN"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "ranger_database_password",
+          "variable": "ranger-ranger_database_password"
+        },
+        {
+          "name": "rangeradmin_user_password",
+          "variable": "ranger-rangeradmin_user_password"
+        },
+        {
+          "name": "rangertagsync_user_password",
+          "variable": "ranger-rangertagsync_user_password"
+        },
+        {
+          "name": "rangerusersync_user_password",
+          "variable": "ranger-rangerusersync_user_password"
+        },
+        {
+          "name": "keyadmin_user_password",
+          "variable": "ranger-keyadmin_user_password"
+        },
+        {
+          "name": "ranger_database_user",
+          "variable": "ranger-ranger_database_user"
+        }
+      ],
+      "serviceType": "RANGER"
+    },
+    {
+      "refName": "hue",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "hue-HUE_SERVER-BASE",
+          "roleType": "HUE_SERVER"
+        },
+        {
+          "base": true,
+          "refName": "hue-HUE_LOAD_BALANCER-BASE",
+          "roleType": "HUE_LOAD_BALANCER"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "database_password",
+          "variable": "hue-database_password"
+        },
+        {
+          "name": "database_type",
+          "variable": "hue-database_type"
+        },
+        {
+          "name": "database_host",
+          "variable": "hue-database_host"
+        }
+      ],
+      "serviceType": "HUE"
+    },
+    {
+      "refName": "hdfs",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_name_dir_list",
+              "variable": "hdfs-NAMENODE-BASE-dfs_name_dir_list"
+            }
+          ],
+          "refName": "hdfs-NAMENODE-BASE",
+          "roleType": "NAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "fs_checkpoint_dir_list",
+              "variable": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list"
+            }
+          ],
+          "refName": "hdfs-SECONDARYNAMENODE-BASE",
+          "roleType": "SECONDARYNAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_data_dir_list",
+              "value": "/data/dfs/dn"
+            }
+          ],
+          "refName": "hdfs-DATANODE-BASE",
+          "roleType": "DATANODE"
+        },
+        {
+          "base": true,
+          "refName": "hdfs-BALANCER-BASE",
+          "roleType": "BALANCER"
+        }
+      ],
+      "serviceType": "HDFS"
+    },
+    {
+      "refName": "impala",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "impala-IMPALAD-BASE",
+          "roleType": "IMPALAD"
+        },
+        {
+          "base": true,
+          "refName": "impala-STATESTORE-BASE",
+          "roleType": "STATESTORE"
+        },
+        {
+          "base": true,
+          "refName": "impala-CATALOGSERVER-BASE",
+          "roleType": "CATALOGSERVER"
+        }
+      ],
+      "serviceType": "IMPALA"
+    },
+    {
+      "refName": "hive",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "hive-GATEWAY-BASE",
+          "roleType": "GATEWAY"
+        },
+        {
+          "base": true,
+          "refName": "hive-HIVEMETASTORE-BASE",
+          "roleType": "HIVEMETASTORE"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "hive_metastore_database_password",
+          "variable": "hive-hive_metastore_database_password"
+        },
+        {
+          "name": "hive_metastore_database_host",
+          "variable": "hive-hive_metastore_database_host"
+        }
+      ],
+      "serviceType": "HIVE"
+    }
+  ]
 }
