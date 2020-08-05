@@ -40,12 +40,12 @@ def wait(cmd, timeout=None):
 
 cm_client.configuration.username = 'admin'
 cm_client.configuration.password = 'admin'
-api_client = cm_client.ApiClient("http://localhost:7180/api/v40")
+api_client = cm_client.ApiClient("http://cloudera:7180/api/v40")
 
 cm_api = cm_client.ClouderaManagerResourceApi(api_client)
 
 # accept trial licence
-cm_api.begin_trial()
+#m_api.begin_trial()
 
 # Install CM Agent on host
 with open ("/root/myRSAkey", "r") as f:
@@ -64,7 +64,6 @@ cmd = cm_api.host_install_command(body=instargs)
 wait(cmd)
 
 
-    
 # create MGMT/CMS
 mgmt_api = cm_client.MgmtServiceResourceApi(api_client)
 api_service = cm_client.ApiService()
@@ -79,7 +78,6 @@ mgmt_api.auto_configure()    # needed?
 mgmt_api.setup_cms(body=api_service)
 cmd = mgmt_api.start_command()
 wait(cmd)
-
 
 
 # create the cluster using the template

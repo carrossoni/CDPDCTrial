@@ -209,3 +209,12 @@ while [ `curl -s -X GET -u "admin:admin"  http://localhost:7180/api/version` -z 
     sleep 10;
 done
 
+echo "-- Now CM is started and the next step is to automate using the CM API"
+
+pip install --upgrade pip cm_client
+
+sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/conf/cdpsandbox.json
+sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
+sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
+
+python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
