@@ -221,3 +221,6 @@ python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
 sudo usermod cloudera -G hadoop
 sudo -u hdfs hdfs dfs -mkdir /user/cloudera
 sudo -u hdfs hdfs dfs -chown cloudera:hadoop /user/cloudera
+sudo -u hdfs hdfs dfs -mkdir /user/admin
+sudo -u hdfs hdfs dfs -chown admin:hadoop /user/admin
+sudo -u hdfs hdfs dfs -chmod -R 0755 /tmp
