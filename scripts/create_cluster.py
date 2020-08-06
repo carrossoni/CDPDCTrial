@@ -45,7 +45,7 @@ api_client = cm_client.ApiClient("http://cloudera:7180/api/v40")
 cm_api = cm_client.ClouderaManagerResourceApi(api_client)
 
 # accept trial licence
-#m_api.begin_trial()
+m_api.begin_trial()
 
 # Install CM Agent on host
 with open ("/root/myRSAkey", "r") as f:
