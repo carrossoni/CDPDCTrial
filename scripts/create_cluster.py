@@ -81,11 +81,11 @@ wait(cmd)
 
 
 # create the cluster using the template
-#with open(sys.argv[1]) as f:
-#    json_str = f.read()
+with open(sys.argv[1]) as f:
+    json_str = f.read()
 
-#Response = namedtuple("Response", "data")
-#dst_cluster_template=api_client.deserialize(response=Response(json_str),response_type=cm_client.ApiClusterTemplate)
-#cmd = cm_api.import_cluster_template(add_repositories=True, body=dst_cluster_template)
-#wait(cmd)
+Response = namedtuple("Response", "data")
+dst_cluster_template=api_client.deserialize(response=Response(json_str),response_type=cm_client.ApiClusterTemplate)
+cmd = cm_api.import_cluster_template(add_repositories=True, body=dst_cluster_template)
+wait(cmd)
 
