@@ -217,3 +217,7 @@ sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
 sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
 
 python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
+
+sudo usermod cloudera -G hadoop
+sudo -u hdfs hdfs dfs -mkdir /user/cloudera
+sudo -u hdfs hdfs dfs -chown cloudera:hadoop /user/cloudera
