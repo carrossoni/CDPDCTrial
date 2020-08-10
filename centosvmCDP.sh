@@ -34,6 +34,8 @@ npm install forever -g
 echo "server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4" >> /etc/chrony.conf
 systemctl restart chronyd
 
+sudo /etc/init.d/network restart
+
 echo "-- Configure networking"
 PUBLIC_IP=`curl https://api.ipify.org/`
 #hostnamectl set-hostname `hostname -f`
