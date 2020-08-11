@@ -1,0 +1,318 @@
+{
+  "cdhVersion": "7.1.3",
+  "cmVersion": "7.1.3",
+  "displayName": "cdptrialsandbox",
+  "hostTemplates": [
+    {
+      "cardinality": 1.0,
+      "refName": "HostTemplate-0-from-cloudera",
+      "roleConfigGroupsRefNames": [
+        "hdfs-BALANCER-BASE",
+        "hdfs-DATANODE-BASE",
+        "hdfs-NAMENODE-BASE",
+        "hdfs-SECONDARYNAMENODE-BASE",
+        "hive-GATEWAY-BASE",
+        "hive-HIVEMETASTORE-BASE",
+        "hue-HUE_LOAD_BALANCER-BASE",
+        "hue-HUE_SERVER-BASE",
+        "impala-CATALOGSERVER-BASE",
+        "impala-IMPALAD-BASE",
+        "impala-STATESTORE-BASE",
+        "ranger-RANGER_ADMIN-BASE",
+        "ranger-RANGER_TAGSYNC-BASE",
+        "ranger-RANGER_USERSYNC-BASE",
+        "solr-SOLR_SERVER-BASE",
+        "zookeeper-SERVER-BASE"
+      ]
+    }
+  ],
+  "instantiator": {
+    "clusterName": "cdptrialsandbox",
+    "hosts": [
+      {
+        "hostName": "cloudera",
+        "hostTemplateRefName": "HostTemplate-0-from-cloudera"
+      }
+    ],
+    "lenient": false,
+    "variables": [
+      {
+        "name": "hdfs-NAMENODE-BASE-dfs_name_dir_list",
+        "value": "/data/dfs/nn"
+      },
+      {
+        "name": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list",
+        "value": "/data/dfs/snn"
+      },
+      {
+        "name": "hive-hive_metastore_database_host",
+        "value": "cloudera"
+      },
+      {
+        "name": "hive-hive_metastore_database_password",
+        "value": "cloudera",
+      },
+      {
+        "name": "hue-database_host",
+        "value": "cloudera"
+      },
+      {
+        "name": "hue-database_password",
+        "value": "cloudera"
+      },
+      {
+        "name": "hue-database_type",
+        "value": "mysql"
+      },
+      {
+        "name": "ranger-keyadmin_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-ranger_database_password",
+        "value": "cloudera"
+      },
+      {
+        "name": "ranger-ranger_database_user",
+        "value": "ranger"
+      },
+      {
+        "name": "ranger-rangeradmin_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-rangertagsync_user_password",
+        "value": "cloudera123"
+      },
+      {
+        "name": "ranger-rangerusersync_user_password",
+        "value": "cloudera123"
+      }
+    ]
+  },
+  "products": [
+    {
+      "product": "CDH",
+      "version": "7.1.3-1.cdh7.1.3.p0.4992530"
+    }
+  ],
+  "repositories": [
+    "https://archive.cloudera.com/cdh7/7.1.3.0/parcels/",
+    "https://archive.cloudera.com/p/cdh7/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/cdh7/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/p/cdh6/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/cdh6/{latest_supported}/parcels/",
+    "https://archive.cloudera.com/p/cdh5/parcels/latest",
+    "https://archive.cloudera.com/cdh5/parcels/5.16/",
+    "https://parcels.repos.intel.com/mkl/latest",
+    "https://archive.cloudera.com/accumulo-c5/parcels/latest/",
+    "https://archive.cloudera.com/accumulo6/6.1/parcels/",
+    "https://archive.cloudera.com/kafka/parcels/latest/",
+    "http://archive.cloudera.com/kudu/parcels/latest/",
+    "https://archive.cloudera.com/sqoop-teradata-connector1/latest/parcels/",
+    "https://archive.cloudera.com/sqoop-connectors/parcels/latest/",
+    "https://archive.cloudera.com/sqoop-netezza-connector1/latest/"
+  ],
+  "services": [
+    {
+      "refName": "zookeeper",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "zookeeper-SERVER-BASE",
+          "roleType": "SERVER"
+        }
+      ],
+      "serviceType": "ZOOKEEPER"
+    },
+    {
+      "refName": "solr",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "solr-SOLR_SERVER-BASE",
+          "roleType": "SOLR_SERVER"
+        }
+      ],
+      "serviceType": "SOLR"
+    },
+    {
+      "refName": "ranger",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "ranger-RANGER_USERSYNC-BASE",
+          "roleType": "RANGER_USERSYNC"
+        },
+        {
+          "base": true,
+          "refName": "ranger-RANGER_TAGSYNC-BASE",
+          "roleType": "RANGER_TAGSYNC"
+        },
+        {
+          "base": true,
+          "refName": "ranger-RANGER_ADMIN-BASE",
+          "roleType": "RANGER_ADMIN"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "ranger_database_password",
+          "variable": "ranger-ranger_database_password"
+        },
+        {
+          "name": "rangeradmin_user_password",
+          "variable": "ranger-rangeradmin_user_password"
+        },
+        {
+          "name": "rangertagsync_user_password",
+          "variable": "ranger-rangertagsync_user_password"
+        },
+        {
+          "name": "rangerusersync_user_password",
+          "variable": "ranger-rangerusersync_user_password"
+        },
+        {
+          "name": "keyadmin_user_password",
+          "variable": "ranger-keyadmin_user_password"
+        },
+        {
+          "name": "ranger_database_user",
+          "variable": "ranger-ranger_database_user"
+        }
+      ],
+      "serviceType": "RANGER"
+    },
+    {
+      "refName": "hue",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "hue-HUE_SERVER-BASE",
+          "roleType": "HUE_SERVER"
+        },
+        {
+          "base": true,
+          "refName": "hue-HUE_LOAD_BALANCER-BASE",
+          "roleType": "HUE_LOAD_BALANCER"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "database_password",
+          "variable": "hue-database_password"
+        },
+        {
+          "name": "database_type",
+          "variable": "hue-database_type"
+        },
+        {
+          "name": "database_host",
+          "variable": "hue-database_host"
+        }
+      ],
+      "serviceType": "HUE"
+    },
+    {
+      "refName": "hdfs",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_name_dir_list",
+              "variable": "hdfs-NAMENODE-BASE-dfs_name_dir_list"
+            }
+          ],
+          "refName": "hdfs-NAMENODE-BASE",
+          "roleType": "NAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "fs_checkpoint_dir_list",
+              "variable": "hdfs-SECONDARYNAMENODE-BASE-fs_checkpoint_dir_list"
+            }
+          ],
+          "refName": "hdfs-SECONDARYNAMENODE-BASE",
+          "roleType": "SECONDARYNAMENODE"
+        },
+        {
+          "base": true,
+          "configs": [
+            {
+              "name": "dfs_data_dir_list",
+              "value": "/data/dfs/dn"
+            }
+          ],
+          "refName": "hdfs-DATANODE-BASE",
+          "roleType": "DATANODE"
+        },
+        {
+          "base": true,
+          "refName": "hdfs-BALANCER-BASE",
+          "roleType": "BALANCER"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "dfs_replication",
+          "value": "1"
+        },
+        {
+          "name": "service_health_suppression_hdfs_under_replicated_blocks",
+          "value": "true"
+        }
+      ],
+      "serviceType": "HDFS"
+    },
+    {
+      "refName": "impala",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "impala-IMPALAD-BASE",
+          "roleType": "IMPALAD"
+        },
+        {
+          "base": true,
+          "refName": "impala-STATESTORE-BASE",
+          "roleType": "STATESTORE"
+        },
+        {
+          "base": true,
+          "refName": "impala-CATALOGSERVER-BASE",
+          "roleType": "CATALOGSERVER"
+        }
+      ],
+      "serviceType": "IMPALA"
+    },
+    {
+      "refName": "hive",
+      "roleConfigGroups": [
+        {
+          "base": true,
+          "refName": "hive-GATEWAY-BASE",
+          "roleType": "GATEWAY"
+        },
+        {
+          "base": true,
+          "refName": "hive-HIVEMETASTORE-BASE",
+          "roleType": "HIVEMETASTORE"
+        }
+      ],
+      "serviceConfigs": [
+        {
+          "name": "hive_metastore_database_password",
+          "variable": "hive-hive_metastore_database_password"
+        },
+        {
+          "name": "hive_metastore_database_host",
+          "variable": "hive-hive_metastore_database_host"
+        }
+      ],
+      "serviceType": "HIVE"
+    }
+  ]
+}
