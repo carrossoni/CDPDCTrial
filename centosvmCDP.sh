@@ -34,6 +34,8 @@ npm install forever -g
 echo "server 169.254.169.123 prefer iburst minpoll 4 maxpoll 4" >> /etc/chrony.conf
 systemctl restart chronyd
 
+sudo /etc/init.d/network restart
+
 echo "-- Configure networking"
 PUBLIC_IP=`curl https://api.ipify.org/`
 #hostnamectl set-hostname `hostname -f`
@@ -58,7 +60,7 @@ echo "-- Install CM and MariaDB"
 
 # CM 7
 cd /
-wget https://archive.cloudera.com/cm7/7.1.1/redhat7/yum/cloudera-manager-trial.repo -P /etc/yum.repos.d/
+wget https://archive.cloudera.com/cm7/7.1.3/redhat7/yum/cloudera-manager-trial.repo -P /etc/yum.repos.d/
 
 # MariaDB 10.1
 cat - >/etc/yum.repos.d/MariaDB.repo <<EOF
