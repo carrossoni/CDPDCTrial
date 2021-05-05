@@ -41,7 +41,7 @@ PUBLIC_IP=`curl https://api.ipify.org/`
 #hostnamectl set-hostname `hostname -f`
 sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
 sed -i$(date +%s).bak '/^[^#]*::1/s/^/# /' /etc/hosts
-echo "`host cloudera | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
+echo "`host cloudera |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
 #sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
@@ -82,7 +82,7 @@ yum install -y cloudera-manager-agent cloudera-manager-daemons cloudera-manager-
 sed -i$(date +%s).bak '/^[^#]*server_host/s/^/# /' /etc/cloudera-scm-agent/config.ini
 sed -i$(date +%s).bak '/^[^#]*listening_ip/s/^/# /' /etc/cloudera-scm-agent/config.ini
 sed -i$(date +%s).bak "/^# server_host.*/i server_host=$(hostname)" /etc/cloudera-scm-agent/config.ini
-sed -i$(date +%s).bak "/^# listening_ip=.*/i listening_ip=$(host cloudera | awk '{print $4}')" /etc/cloudera-scm-agent/config.ini
+sed -i$(date +%s).bak "/^# listening_ip=.*/i listening_ip=$(host cloudera |grep address | awk '{print $4}')" /etc/cloudera-scm-agent/config.ini
 
 service cloudera-scm-agent restart
 
@@ -149,7 +149,6 @@ CREATE USER das WITH PASSWORD 'cloudera';
 GRANT ALL PRIVILEGES ON DATABASE das TO das;
 EOF
 
-
 echo "-- Install CSDs"
 
 # install local CSDs
@@ -162,7 +161,6 @@ echo "-- Install local parcels"
 mv ~/*.parcel ~/*.parcel.sha /opt/cloudera/parcel-repo/
 mv /home/centos/*.parcel /home/centos/*.parcel.sha /opt/cloudera/parcel-repo/
 chown cloudera-scm:cloudera-scm /opt/cloudera/parcel-repo/*
-
 
 
 echo "-- Enable passwordless root login via rsa key"
