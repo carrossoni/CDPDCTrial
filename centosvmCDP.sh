@@ -164,6 +164,13 @@ ssh-keyscan -H `hostname` >> ~/.ssh/known_hosts
 sed -i 's/.*PermitRootLogin.*/PermitRootLogin without-password/' /etc/ssh/sshd_config
 systemctl restart sshd
 
+echo "-- Prepare parcels dirs"
+
+chmod -R 777 /opt/cloudera/parcel-repo
+chmod -R 777 /opt/cloudera/parcel-cache
+chmod -R 777 /opt/cloudera/csd
+chmod -R 777 /opt/cloudera/parcels
+
 echo "-- Start CM, it takes about 2 minutes to be ready"
 systemctl start cloudera-scm-server
 
