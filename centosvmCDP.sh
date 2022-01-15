@@ -47,7 +47,7 @@ echo "-- Configure networking"
 #sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
 sed -i$(date +%s).bak '/^[^#]*::1/s/^/# /' /etc/hosts
 #sed -i$(date +%s).bak 's/127\.0\.0\.1/& cloudera /' /etc/hosts
-echo "`host localhost |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
+#echo "`host localhost |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
 #sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
@@ -187,7 +187,7 @@ echo "-- Now CM is started and the next step is to automate using the CM API"
 
 pip install cm_client
 
-sed -i "s/YourHostname/localhost/g" ~/CDPDCTrial/scripts/create_cluster.py
+sed -i "s/YourHostname/localhost.localdomain/g" ~/CDPDCTrial/scripts/create_cluster.py
 
 mkdir /data
 mkdir /data/dfs
