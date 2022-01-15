@@ -186,6 +186,10 @@ pip install cm_client
 
 sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
 
+mkdir /data
+mkdir /data/dfs
+chmod -R 777 /data
+
 python ~/CDPDCTrial/scripts/create_cluster.py ~/CDPDCTrial/conf/cdpsandbox.json
 
 sudo usermod cloudera -G hadoop
