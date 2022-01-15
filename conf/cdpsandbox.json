@@ -30,7 +30,7 @@
     "clusterName": "cdptrialsandbox",
     "hosts": [
       {
-        "hostName": "cloudera",
+        "hostName": "localhost",
         "hostTemplateRefName": "HostTemplate-0-from-cloudera"
       }
     ],
