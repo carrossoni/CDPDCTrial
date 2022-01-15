@@ -47,7 +47,7 @@ echo "-- Configure networking"
 #sed -i$(date +%s).bak '/^[^#]*cloudera/s/^/# /' /etc/hosts
 sed -i$(date +%s).bak '/^[^#]*::1/s/^/# /' /etc/hosts
 #sed -i$(date +%s).bak 's/127\.0\.0\.1/& cloudera /' /etc/hosts
-echo "`host cloudera |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
+echo "`host localhost |grep address | awk '{print $4}'` `hostname` `hostname`" >> /etc/hosts
 #sed -i "s/HOSTNAME=.*/HOSTNAME=`hostname`/" /etc/sysconfig/network
 systemctl disable firewalld
 systemctl stop firewalld
