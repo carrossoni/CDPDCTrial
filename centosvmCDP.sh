@@ -184,7 +184,7 @@ echo "-- Now CM is started and the next step is to automate using the CM API"
 
 pip install cm_client
 
-sed -i "s/YourHostname/`hostname -f`/g" ~/CDPDCTrial/scripts/create_cluster.py
+sed -i "s/YourHostname/localhost/g" ~/CDPDCTrial/scripts/create_cluster.py
 
 mkdir /data
 mkdir /data/dfs
