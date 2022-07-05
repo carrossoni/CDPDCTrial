@@ -2,7 +2,8 @@
 Steps to create a Cloudera CDP DC Trial environment from scratch
 
 # Updates
-Jun/22 -> Not mantained anymore, please use Cloudera website to find updated information.
+##Jun/22 -> Not mantained anymore, please use Cloudera website to find updated information.
+
 Jan/22 -> Updated for CDP Base 7.1.7
 
 ## Requirements
